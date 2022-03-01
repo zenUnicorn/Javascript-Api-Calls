@@ -28,5 +28,18 @@ $(document).ready(function() {
   });
 });
 
+//API URL
+const url = http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=[Add-Your-API-Key]; 
 
+// function that listens for changes to the XMLHttpRequest
+request.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    const response = JSON.parse(this.responseText);
+    getElements(response);
+  }
+};
 
+// track changes in the ready state
+request.onreadystatechange = function() {
+  console.log(this.readyState);
+};

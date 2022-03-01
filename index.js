@@ -57,5 +57,45 @@ request.onreadystatechange = function() {
 };
 
 
+let request = new XMLHttpRequest();
+const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=[YOUR-API-KEY-HERE]`;
+
+request.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    const response = JSON.parse(this.responseText);
+    getElements(response);
+  }
+};
+
+// We've covered everything except for the two lines below!
+request.open("GET", url, true);
+request.send();
+
+// Note: This code will not work! It's meant to show why we need to structure our code to use a callback.
+
+    let response;
+
+    request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        response = JSON.parse(this.responseText);
+      }
+    };
+
+    request.open("GET", url, true);
+    request.send();
+    getElements(response);
+
+//Let's look at our original code once more:
+request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const response = JSON.parse(this.responseText);
+        getElements(response);
+      }
+    };
+
+    function getElements(response) {
+      $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
+      $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
+    }
 
 

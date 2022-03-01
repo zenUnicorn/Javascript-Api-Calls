@@ -43,3 +43,19 @@ request.onreadystatechange = function() {
 request.onreadystatechange = function() {
   console.log(this.readyState);
 };
+
+const response = JSON.parse(this.responseText);
+
+//callback
+getElements(response);
+
+request.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    debugger;
+    ...
+  }
+};
+
+
+
+
